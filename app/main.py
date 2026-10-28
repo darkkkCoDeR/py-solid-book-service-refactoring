@@ -1,5 +1,5 @@
-from app.book import Book
-from app.book_service import BookService
+from app.models.book import Book
+from app.services.book_service import BookService
 
 
 def main(book: Book, commands: list[tuple[str, str]]) -> None | str:

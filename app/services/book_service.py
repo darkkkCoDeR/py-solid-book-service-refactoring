@@ -1,7 +1,7 @@
-from app.book import Book
-from app.displayers import ConsoleDisplayer, ReverseDisplayer
-from app.printers import ConsolePrinter, ReversePrinter
-from app.serializers import JsonSerializer, XmlSerializer
+from app.displayers.displayers import ConsoleDisplayer, ReverseDisplayer
+from app.models.book import Book
+from app.printers.printers import ConsolePrinter, ReversePrinter
+from app.serializers.serializers import JsonSerializer, XmlSerializer
 
 
 class BookService:
