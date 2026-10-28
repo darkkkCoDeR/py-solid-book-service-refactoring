@@ -1,12 +1,13 @@
 import json
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree
 from abc import ABC, abstractmethod
 
 
 class Book:
-    def __init__(self, title: str, content: str):
+    def __init__(self, title: str, content: str) -> None:
         self.title = title
         self.content = content
+
 
 class Displayer(ABC):
     @abstractmethod
@@ -55,12 +56,12 @@ class JsonSerializer(Serializer):
 
 class XmlSerializer(Serializer):
     def serialize(self, book: Book) -> str:
-        root = ET.Element("book")
-        title = ET.SubElement(root, "title")
+        root = xml.etree.ElementTree.Element("book")
+        title = xml.etree.ElementTree.SubElement(root, "title")
         title.text = book.title
-        content = ET.SubElement(root, "content")
+        content = xml.etree.ElementTree.SubElement(root, "content")
         content.text = book.content
-        return ET.tostring(root, encoding="unicode")
+        return xml.etree.ElementTree.tostring(root, encoding="unicode")
 
 
 class BookService:
@@ -78,7 +79,11 @@ class BookService:
             "xml": XmlSerializer(),
         }
 
-    def execute(self, book: Book, commands: list[tuple[str, str]]) -> None | str:
+    def execute(
+            self,
+            book: Book,
+            commands: list[tuple[str, str]]
+    ) -> None | str:
         for command, method_type in commands:
             if command == "display":
                 self._run(self.displayers, method_type, "display", book)
